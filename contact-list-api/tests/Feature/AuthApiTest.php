@@ -33,39 +33,23 @@ class AuthApiTest extends TestCase
 
         $response->assertStatus(201)
             ->assertJsonStructure([
-                'user' => [
-                    'id',
-                    'name',
-                    'email',
-                    'created_at',
-                    'updated_at',
+                'data' => [
+                    'user' => [
+                        'id',
+                        'name',
+                        'email',
+                        'created_at',
+                        'updated_at',
+                    ],
+                    'token',
                 ],
-                'token',
+
             ]);
 
         $this->assertDatabaseHas('users', [
             'email' => 'test@example.com',
             'name' => 'Test User',
         ]);
-    }
-    /**
-     * A basic feature test example.
-     */
-    public function test_user_can_login_with_correct_credentials(): void
-    {
-        $user = User::factory()->create([
-            'email' => 'test@gmail.com',
-            'password' => Hash::make('test1234'),
-        ]);
-
-        $credentials = [
-            'email' => 'test@gmail.com',
-            'password' => 'test1234',
-        ];
-
-        $response = $this->authService->login($credentials);
-        $this->assertArrayHasKey('user', $response);
-        $this->assertArrayHasKey('token', $response);
     }
 
     public function test_can_loging_user()
@@ -84,14 +68,16 @@ class AuthApiTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJsonStructure([
-                'user' => [
-                    'id',
-                    'name',
-                    'email',
-                    'created_at',
-                    'updated_at',
-                ],
-                'token',
+                'data' => [
+                    'user' => [
+                        'id',
+                        'name',
+                        'email',
+                        'created_at',
+                        'updated_at',
+                    ],
+                    'token',
+                ]
             ]);
     }
 
@@ -105,7 +91,7 @@ class AuthApiTest extends TestCase
         ])->postJson('/api/logout');
 
         $response->assertStatus(200)
-            ->assertJson(['message' => 'Logged out']);
+            ->assertJson(['message' => 'Logged out successfully']);
 
         $this->assertEmpty($user->tokens);
     }
@@ -124,7 +110,8 @@ class AuthApiTest extends TestCase
 
         $response = $this->postJson('/api/login', $invalidData);
 
-        $response->assertStatus(422)
-            ->assertJson(['message' => 'Invalid credentials.']);
+        $response->assertStatus(401)
+            ->assertJson(['message' => 'Login failed'])
+            ->assertJsonFragment(['errors' => ['Invalid credentials']]);
     }
 }

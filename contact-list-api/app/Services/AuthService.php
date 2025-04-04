@@ -2,9 +2,8 @@
 
 namespace App\Services;
 
-use App\Repositories\Interfaces\Users\UserRepositoryInterface;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
+use App\Repositories\Users\UserRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
 
 class AuthService
 {
@@ -22,17 +21,14 @@ class AuthService
 
     public function login(array $data)
     {
-        $user = $this->userRepository->userByEmail($data['email']);
-
-        if (!$user || !Hash::check($data['password'], $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['Invalid credentials.'],
-            ]);
+        if (!Auth::attempt($data)) {
+            throw new \Exception('Invalid credentials', 401);
         }
 
+        $user = Auth::user();
         return [
             'user' => $user,
             'token' => $user->createToken('auth_token')->plainTextToken
-        ];
+        ];;
     }
 }

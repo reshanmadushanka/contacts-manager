@@ -4,8 +4,8 @@ namespace App\Providers;
 
 use App\Repositories\Contact\ContactRepository;
 use App\Repositories\Contact\ContactRepositoryInterface;
-use App\Repositories\Interfaces\Users\UserRepository;
-use App\Repositories\Interfaces\Users\UserRepositoryInterface;
+use App\Repositories\Users\UserRepository;
+use App\Repositories\Users\UserRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

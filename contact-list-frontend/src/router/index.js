@@ -2,9 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/Auth/LoginView.vue'
 import RegisterView from '@/views/Auth/RegisterView.vue'
-// import ContactsView from '@/views/Contacts/ContactsView.vue'
-// import ContactDetail from '@/views/Contacts/ContactDetail.vue'
-import { useAuthStore } from '@/stores/auth'
+import ContactsView from '@/views/Contacts/ContactsView.vue'
+import { useAuthStore } from '@/stores/authStore'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,12 +26,12 @@ const router = createRouter({
       component: RegisterView,
       meta: { requiresGuest: true },
     },
-    // {
-    //   path: '/contacts',
-    //   name: 'contacts',
-    //   component: ContactsView,
-    //   meta: { requiresAuth: true },
-    // },
+    {
+      path: '/contacts',
+      name: 'contacts',
+      component: ContactsView,
+      meta: { requiresAuth: true },
+    },
     // {
     //   path: '/contacts/:id',
     //   name: 'contact-detail',

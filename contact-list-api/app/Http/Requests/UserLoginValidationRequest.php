@@ -2,11 +2,12 @@
 
 namespace App\Http\Requests;
 
+use App\Helpers\ApiResponse;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UserLoginValidationRequest extends FormRequest
+class UserLoginValidationRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

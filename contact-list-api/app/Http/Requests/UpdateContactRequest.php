@@ -2,10 +2,13 @@
 
 namespace App\Http\Requests;
 
+use App\Helpers\ApiResponse;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
-class UpdateContactRequest extends FormRequest
+class UpdateContactRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,7 +32,18 @@ class UpdateContactRequest extends FormRequest
                 'email',
                 Rule::unique('contacts')->ignore($this->contact->id),
             ],
-            'phone_number' => 'required|string|max:20',
+            'phone_number' => [
+                'required',
+                'phone:LK',
+                Rule::unique('contacts')->ignore($this->contact->id),
+            ],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'phone_number.phone' => 'The :attribute field must be a valid phone number.',
         ];
     }
 }

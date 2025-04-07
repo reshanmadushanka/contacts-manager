@@ -4,7 +4,7 @@
 
         <div class="mb-3">
             <label for="name" class="form-label">Full Name</label>
-            <input type="text" class="form-control" id="name" v-model="form.name" required autofocus>
+            <input type="text" class="form-control" id="name" v-model="form.name" autofocus>
             <div v-if="errors.name" class="invalid-feedback d-block">
                 {{ errors.name[0] }}
             </div>
@@ -12,7 +12,7 @@
 
         <div class="mb-3">
             <label for="email" class="form-label">Email Address</label>
-            <input type="email" class="form-control" id="email" v-model="form.email" required>
+            <input type="email" class="form-control" id="email" v-model="form.email">
             <div v-if="errors.email" class="invalid-feedback d-block">
                 {{ errors.email[0] }}
             </div>
@@ -20,7 +20,7 @@
 
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" v-model="form.password" required minlength="8">
+            <input type="password" class="form-control" id="password" v-model="form.password" minlength="8">
             <div class="form-text">Minimum 8 characters</div>
             <div v-if="errors.password" class="invalid-feedback d-block">
                 {{ errors.password[0] }}
@@ -29,10 +29,9 @@
 
         <div class="mb-4">
             <label for="password_confirmation" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="password_confirmation" v-model="form.password_confirmation"
-                required>
+            <input type="password" class="form-control" id="password_confirmation" v-model="form.password_confirmation">
             <div v-if="errors.password_confirmation" class="invalid-feedback d-block">
-                {{ errors.password_confirmation[0] }}
+                {{ errors.password_confirmation }}
             </div>
         </div>
 
@@ -45,7 +44,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useAuthStore } from '@/stores/auth'
+import { useAuthStore } from '@/stores/authStore'
 import { useRouter } from 'vue-router'
 
 const authStore = useAuthStore()

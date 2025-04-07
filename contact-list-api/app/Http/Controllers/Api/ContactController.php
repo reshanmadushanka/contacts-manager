@@ -22,7 +22,7 @@ class ContactController extends Controller
     public function index(Request $request)
     {
         try {
-            $contacts = $this->contactService->getAllContacts($request->all(), 15);
+            $contacts = $this->contactService->getAllContacts($request->all(), $request->get('per_page'));
             return ApiResponse::success($contacts, 'Contacts fetched');
         } catch (Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);

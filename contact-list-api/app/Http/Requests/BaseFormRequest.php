@@ -3,17 +3,17 @@
 namespace App\Http\Requests;
 
 use App\Helpers\ApiResponse;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
 
-class UserValidationRequest extends BaseFormRequest
+class BaseFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -21,12 +21,12 @@ class UserValidationRequest extends BaseFormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    protected function failedValidation(Validator $validator): void
     {
-        return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:6',
-        ];
+        throw ApiResponse::error(
+            'Validation errors',
+            422,
+            $validator->errors()->toArray()
+        )->throwResponse();
     }
 }

@@ -33,7 +33,7 @@ class ContactApiTest extends TestCase
             'phone_number' => '0711380025',
         ];
 
-        $response = $this->postJson('/api/contacts', $data);
+        $response = $this->postJson('/api/v1/contacts', $data);
         $response->assertStatus(201)
             ->assertJsonFragment(['message' => 'Contact created'])
             ->assertJsonFragment(['name' => 'Reshan Wickramasinghe']);
@@ -49,7 +49,7 @@ class ContactApiTest extends TestCase
         $this->authenticate();
 
         Contact::factory()->count(15)->create(['added_by' => auth()->user()->id]);
-        $response = $this->getJson('/api/contacts?page=1&per_page=8');
+        $response = $this->getJson('/api/v1/contacts?page=1&per_page=8');
         $response->assertStatus(200)
             ->assertJsonFragment(['message' => 'Contacts fetched'])
             ->assertJsonStructure([
@@ -82,7 +82,7 @@ class ContactApiTest extends TestCase
         $this->authenticate();
 
         $contact = Contact::factory()->create(['added_by' => auth()->user()->id]);
-        $response = $this->getJson('/api/contacts/'.$contact->id);
+        $response = $this->getJson('/api/v1/contacts/'.$contact->id);
         $response->assertStatus(200)
             ->assertJsonFragment(['id' => $contact->id])
             ->assertJsonFragment(['name' => $contact->name]);
@@ -105,7 +105,7 @@ class ContactApiTest extends TestCase
             'phone_number' => $contact->phone_number,
         ];
 
-        $response = $this->putJson("/api/contacts/{$contact->id}", $update);
+        $response = $this->putJson("/api/v1/contacts/{$contact->id}", $update);
         $response->assertStatus(200)
             ->assertJsonFragment(['name' => 'Contact Test'])
             ->assertJsonFragment(['message' => 'Contact updated'])
@@ -124,7 +124,7 @@ class ContactApiTest extends TestCase
 
         $contact = Contact::factory()->create();
 
-        $response = $this->deleteJson("/api/contacts/{$contact->id}");
+        $response = $this->deleteJson("/api/v1/contacts/{$contact->id}");
 
         $response->assertStatus(200)
             ->assertJsonFragment(['message' => 'Contact deleted']);

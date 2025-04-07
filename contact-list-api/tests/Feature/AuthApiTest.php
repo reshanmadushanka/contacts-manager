@@ -29,7 +29,7 @@ class AuthApiTest extends TestCase
             'password_confirmation' => 'password123',
         ];
 
-        $response = $this->postJson('/api/register', $userData);
+        $response = $this->postJson('/api/v1/register', $userData);
 
         $response->assertStatus(201)
             ->assertJsonStructure([
@@ -64,7 +64,7 @@ class AuthApiTest extends TestCase
             'password' => 'test1234',
         ];
 
-        $response = $this->postJson('/api/login', $loginData);
+        $response = $this->postJson('/api/v1/login', $loginData);
 
         $response->assertStatus(200)
             ->assertJsonStructure([
@@ -88,7 +88,7 @@ class AuthApiTest extends TestCase
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$token,
-        ])->postJson('/api/logout');
+        ])->postJson('/api/v1/logout');
 
         $response->assertStatus(200)
             ->assertJson(['message' => 'Logged out successfully']);
@@ -108,7 +108,7 @@ class AuthApiTest extends TestCase
             'password' => 'wrongpassword',
         ];
 
-        $response = $this->postJson('/api/login', $invalidData);
+        $response = $this->postJson('/api/v1/login', $invalidData);
 
         $response->assertStatus(401)
             ->assertJson(['message' => 'Login failed'])

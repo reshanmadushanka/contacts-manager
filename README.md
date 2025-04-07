@@ -12,8 +12,8 @@ This is a full-stack contact management application built with:
 ## Project Structure
 
 ```
-/contact-backend     --> Laravel API
-/contact-frontend    --> Vue 3 frontend
+/contact-list-api     --> Laravel API
+/contact-list-frontend    --> Vue 3 frontend
 ```
 
 ---
@@ -45,7 +45,7 @@ This is a full-stack contact management application built with:
 ### 1. Backend (Laravel)
 
 ```bash
-cd contact-backend
+cd contact-list-api
 cp .env.example .env
 composer install
 php artisan key:generate
@@ -58,7 +58,7 @@ php artisan serve
 ### 2. Frontend (Vue 3)
 
 ```bash
-cd contact-frontend
+cd contact-list-frontend
 cp .env.example .env
 npm install
 npm run dev
@@ -107,7 +107,7 @@ php artisan config:publish cors
 ### Frontend `.env`:
 
 ```env
-VITE_API_BASE_URL=http://localhost:8000/api
+VITE_API_BASE_URL=http://localhost:8000/api/v1
 ```
 
 ### Backend `.env`:

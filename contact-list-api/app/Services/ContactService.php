@@ -12,15 +12,17 @@ class ContactService
      * The ContactService class is responsible for handling business logic related to contacts.
      * It interacts with the ContactRepository to perform CRUD operations on contact data.
      */
-    public function __construct(protected ContactRepository $contactRepository) {}
+    public function __construct(protected ContactRepository $contactRepository)
+    {
+    }
 
     /**
      * Get all contacts.
      * This method retrieves all contacts based on the provided filters and pagination.
      */
-    public function getAllContacts(array $filters = [], int $perPage = 15)
+    public function getAllContacts(array $filters = [], int $perPage = 15, $userId = null)
     {
-        return $this->contactRepository->all($filters, $perPage);
+        return $this->contactRepository->all($filters, $perPage, $userId);
     }
 
     /**
@@ -31,7 +33,6 @@ class ContactService
     {
         return $this->contactRepository->find($id);
     }
-
 
     /**
      * Create a new contact.

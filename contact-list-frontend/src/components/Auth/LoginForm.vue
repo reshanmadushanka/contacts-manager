@@ -43,7 +43,7 @@ const handleLogin = async () => {
     isLoading.value = true
     try {
         await authStore.login(form.value)
-        router.push('/')
+        router.push('/contacts')
     } catch (err) {
         error.value = 'Invalid email or password'
     } finally {

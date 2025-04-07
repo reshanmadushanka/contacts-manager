@@ -1,6 +1,11 @@
 <template>
     <div class="container mt-4">
-
+        <div class="card-header d-flex justify-content-between align-items-center bg-white mb-4">
+            <h5 class="mb-0 fw-bold text-primary">Contacts</h5>
+            <button @click="showAddModal" class="btn btn-primary">
+                <i class="bi bi-plus-circle me-2"></i> Add New Contact
+            </button>
+        </div>
         <!-- Loading Indicator -->
         <div v-if="contactStore.isLoading" class="text-center my-4">
             <div class="spinner-border text-primary" role="status">
@@ -10,19 +15,12 @@
         </div>
 
         <!-- Empty State -->
-        <div v-else-if="contacts && contacts.length === 0" class="text-center py-5">
+        <div v-else-if="!contactStore.isLoading && !contactStore.contacts?.data?.data?.length" class="text-center py-5">
             <h4 class="text-muted">No contacts found</h4>
             <p class="text-muted">Add your first contact to get started</p>
         </div>
-
         <!-- Contacts Table -->
-        <div v-else class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">Contacts</h5>
-                <button @click="showAddModal" class="btn btn-primary btn-sm">
-                    <i class="bi bi-plus"></i> Add Contact
-                </button>
-            </div>
+        <div v-else-if="contacts?.data?.data" class="card">
             <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table table-hover mb-0">
@@ -115,8 +113,8 @@ const handleContactAdded = async () => {
     await fetchContacts(props.currentPage)
 }
 
-onMounted(async () => {
-    await fetchContacts(props.currentPage)
+onMounted(() => {
+    fetchContacts(props.currentPage)
 })
 
 const pages = computed(() => {

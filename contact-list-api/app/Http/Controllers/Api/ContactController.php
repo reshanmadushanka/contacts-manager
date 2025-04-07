@@ -14,7 +14,9 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    public function __construct(protected ContactService $contactService) {}
+    public function __construct(protected ContactService $contactService)
+    {
+    }
 
     /**
      * Display a listing of the resource.
@@ -22,7 +24,8 @@ class ContactController extends Controller
     public function index(Request $request)
     {
         try {
-            $contacts = $this->contactService->getAllContacts($request->all(), $request->get('per_page'));
+            $contacts = $this->contactService->getAllContacts($request->all(), $request->get('per_page'), auth()->user()->id);
+
             return ApiResponse::success($contacts, 'Contacts fetched');
         } catch (Exception $e) {
             return ApiResponse::error($e->getMessage(), 500);
@@ -36,6 +39,7 @@ class ContactController extends Controller
     {
         try {
             $contact = $this->contactService->createContact($request->validated(), auth()->user());
+
             return ApiResponse::success(new ContactResource($contact), 'Contact created', 201);
         } catch (Exception $e) {
             return ApiResponse::error('Failed to create contact', 500, [$e->getMessage()]);
@@ -49,6 +53,7 @@ class ContactController extends Controller
     {
         try {
             $contact = $this->contactService->getContactById($id);
+
             return ApiResponse::success(new ContactResource($contact), 'Contact details');
         } catch (Exception $e) {
             return ApiResponse::error('Contact not found', 404, [$e->getMessage()]);
@@ -58,10 +63,11 @@ class ContactController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateContactRequest  $request, Contact $contact)
+    public function update(UpdateContactRequest $request, Contact $contact)
     {
         try {
             $updatedContact = $this->contactService->updateContact($contact, $request->validated());
+
             return ApiResponse::success(new ContactResource($updatedContact), 'Contact updated');
         } catch (Exception $e) {
             return ApiResponse::error('Failed to update contact', 400, [$e->getMessage()]);
@@ -75,6 +81,7 @@ class ContactController extends Controller
     {
         try {
             $this->contactService->deleteContact($id);
+
             return ApiResponse::success([], 'Contact deleted');
         } catch (Exception $e) {
             return ApiResponse::error('Failed to delete contact', 400, [$e->getMessage()]);

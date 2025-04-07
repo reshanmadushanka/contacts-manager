@@ -2,10 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Helpers\ApiResponse;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Http\FormRequest;
-
 class UserValidationRequest extends BaseFormRequest
 {
     /**

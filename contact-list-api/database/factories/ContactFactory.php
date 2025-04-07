@@ -22,8 +22,8 @@ class ContactFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'phone_number' => fake()->phoneNumber,
-            'added_by' =>  $user->id,
+            'phone_number' => $this->faker->regexify('\+94(7[01245678])\d{7}'),
+            'added_by' => $user->id,
         ];
     }
 }

@@ -17,19 +17,23 @@ interface ContactRepositoryInterface
     /**
      * Get all contacts
      */
-    public function all(array $filters = [], int $perPage);
+    public function all(array $filters, int $perPage, $userId = null);
+
     /**
      * Get a contact by ID
      */
     public function find(int $id);
+
     /**
      * Create a new contact
      */
     public function create(array $data, User $user);
+
     /**
      * Update an existing contact
      */
     public function update(Contact $contact, array $data);
+
     /**
      * Delete an existing contact
      */

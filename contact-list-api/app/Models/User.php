@@ -11,7 +11,9 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -49,6 +51,7 @@ class User extends Authenticatable
 
     /**
      * Get the contacts for the user.
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function contacts()

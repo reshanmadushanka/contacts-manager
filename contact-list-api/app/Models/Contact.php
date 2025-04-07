@@ -10,11 +10,13 @@ class Contact extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
     protected $fillable = ['name', 'email', 'phone_number', 'added_by'];
 
     /**
      * The attributes that should be hidden for serialization.
      * Get the user that added the contact.
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()

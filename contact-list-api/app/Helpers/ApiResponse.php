@@ -10,7 +10,7 @@ class ApiResponse
             'success' => true,
             'message' => $message,
             'data' => $data,
-            'code' => $status
+            'code' => $status,
         ], $status);
     }
 
@@ -20,7 +20,7 @@ class ApiResponse
             'success' => false,
             'message' => $message,
             'errors' => $errors,
-            'code' => $status
+            'code' => $status,
         ], $status);
     }
 }

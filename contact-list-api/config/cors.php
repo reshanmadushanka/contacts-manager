@@ -27,7 +27,7 @@ return [
         'Authorization',
         'X-Socket-ID',
         'X-RateLimit-Limit',
-        'X-RateLimit-Remaining'
+        'X-RateLimit-Remaining',
     ],
 
     'max_age' => 60 * 60 * 24, // 24 hours

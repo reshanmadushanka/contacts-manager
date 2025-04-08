@@ -16,9 +16,7 @@ import Navbar from '@/components/Layouts/Navbar.vue';
 </script>
 
 <style>
-/* Add global styles here if needed */
 main {
   min-height: calc(100vh - 120px);
-  /* Adjust based on your navbar/footer height */
 }
 </style>

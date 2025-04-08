@@ -32,12 +32,6 @@ const router = createRouter({
       component: ContactsView,
       meta: { requiresAuth: true },
     },
-    // {
-    //   path: '/contacts/:id',
-    //   name: 'contact-detail',
-    //   component: ContactDetail,
-    //   meta: { requiresAuth: true },
-    // },
   ],
 })
 

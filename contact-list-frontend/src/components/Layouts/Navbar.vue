@@ -85,7 +85,6 @@ const authStore = useAuthStore()
 
 const isAuthenticated = computed(() => authStore.isAuthenticated)
 const currentUser = computed(() => authStore.user)
-const unreadCount = computed(() => 0) // Replace with actual notification count
 
 const userInitials = computed(() => {
     if (!currentUser.value?.name) return ''

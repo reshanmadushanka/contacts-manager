@@ -34,7 +34,7 @@ This is a full-stack contact management application built with:
 | Layer       | Tech Used                                  |
 |-------------|---------------------------------------------|
 | Frontend    | Vue 3, Vite, Pinia, Axios, Bootstrap 5      |
-| Backend     | Laravel 11, Sanctum, MySQL (or SQLite)      |
+| Backend     | Laravel 12, Sanctum, MySQL (or SQLite)      |
 | Auth        | Laravel Sanctum (SPA authentication)        |
 | Deployment  | Vite build (frontend) + Laravel API         |
 
@@ -136,4 +136,22 @@ Run backend tests:
 ```bash
 php artisan test
 ```
+You can test all API endpoints using the included Postman collection.
+
+### ✅ Postman Collection
+
+- Download or import the collection from:  
+  [`postman/ContactManagerAPI.postman_collection.json`](./postman/ContactList.postman_collection.json)
+
+To use:
+1. Open [Postman](https://www.postman.com/downloads/).
+2. Click **Import**.
+3. Choose the file from `postman/ContactList.postman_collection.json`.
+4. Make sure your local Laravel API is running at `http://localhost:8000`.
+
+### Authentication
+
+- Register or login to receive the Bearer token.
+- Set `Authorization` header as:  
+  `Bearer YOUR_ACCESS_TOKEN`
 
